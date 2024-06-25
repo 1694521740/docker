@@ -22,8 +22,12 @@ jobs:
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
         sudo apt-get update
-        sudo apt-get install -y docker-ce
-        sudo apt-get install -y docker-ce-cli  # 确保Docker CLI已安装
+        sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+    - name: Check Docker Version
+      run: |
+        docker --version
+        docker version
 
     - name: Git pull
       uses: actions/checkout@v4
@@ -35,8 +39,8 @@ jobs:
       uses: docker/login-action@v3
       with:
         registry: registry.cn-hangzhou.aliyuncs.com
-        username: aliyun8879165869
-        password: wsz5207208
+        username: ${{ secrets.ALIYUN_USERNAME }}
+        password: ${{ secrets.ALIYUN_PASSWORD }}
         logout: false
 
     - name: Use Skopeo Tools Sync Image to Docker Hub
