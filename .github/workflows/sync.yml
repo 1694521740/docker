@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Remove old Docker versions
+      run: |
+        sudo apt-get remove -y docker docker-engine docker.io containerd runc
+
     - name: Install Latest Docker
       run: |
         sudo apt-get update
