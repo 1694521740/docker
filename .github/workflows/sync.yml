@@ -24,6 +24,10 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
+    - name: Install Skopeo
+      run: |
+        sudo apt-get install -y skopeo
+
     - name: Check Docker Version
       run: |
         docker --version
@@ -45,4 +49,5 @@ jobs:
 
     - name: Use Skopeo Tools Sync Image to Docker Hub
       run: |
-        skopeo copy docker-daemon:lubo1994/pv-hawk:latest docker://registry.cn-hangzhou.aliyuncs.com/aliyun8879165869/sun-panel:1.4.0
+        docker pull lubo1994/pv-hawk:latest
+        skopeo copy docker://lubo1994/pv-hawk:latest docker://registry.cn-hangzhou.aliyuncs.com/aliyun8879165869/sun-panel:1.4.0
