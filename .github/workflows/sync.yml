@@ -23,6 +23,7 @@ jobs:
         sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
         sudo apt-get update
         sudo apt-get install -y docker-ce
+        sudo apt-get install -y docker-ce-cli  # 确保Docker CLI已安装
 
     - name: Git pull
       uses: actions/checkout@v4
